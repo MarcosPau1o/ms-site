@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-tema="escuro">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
+    --sans:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+    --serif:"Source Serif 4",Georgia,serif;
+    --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  }
+
+  /* ---- tema escuro (padrão) ---- */
+  :root,
+  :root[data-tema="escuro"]{
+    --paper:#151A2B;
+    --grid:rgba(233,229,222,.042);
+    --grid-strong:rgba(233,229,222,.08);
+    --ink:#E9E5DE;
+    --ink-2:#99A2BA;
+    --hot:#E5776A;
+    --warm:#F2A65A;
+    --cool:#6FD3C7;
+    --rule:rgba(233,229,222,.16);
+
+    --surface:rgba(233,229,222,.035);
+    --node-fill:rgba(28,35,56,.92);
+    --node-fill-2:rgba(28,35,56,.85);
+    --flash:rgba(242,166,90,.26);
+
+    --btn-bg:#F2A65A;
+    --btn-ink:#20160A;
+    --btn-hover-ink:#0E1A18;
+
+    --contact-bg:#101527;
+    --contact-ink:#E9E5DE;
+    --contact-ink-2:#99A2BA;
+    --contact-rule:rgba(233,229,222,.16);
+  }
+
+  /* ---- tema claro ---- */
+  :root[data-tema="claro"]{
     --paper:#E6E9E5;
     --grid:rgba(20,49,46,.055);
     --grid-strong:rgba(20,49,46,.10);
@@ -20,9 +55,43 @@
     --cool:#2C7062;
     --rule:rgba(20,49,46,.18);
 
-    --sans:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-    --serif:"Source Serif 4",Georgia,serif;
-    --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+    --surface:rgba(255,255,255,.42);
+    --node-fill:rgba(255,255,255,.90);
+    --node-fill-2:rgba(255,255,255,.85);
+    --flash:rgba(188,138,28,.32);
+
+    --btn-bg:#14312E;
+    --btn-ink:#E6E9E5;
+    --btn-hover-ink:#E6E9E5;
+
+    --contact-bg:#14312E;
+    --contact-ink:#E6E9E5;
+    --contact-ink-2:rgba(231,233,227,.72);
+    --contact-rule:rgba(231,233,227,.25);
+  }
+
+  /* Transição apenas nas propriedades de cor, ao trocar de tema. */
+  body,
+  .panel,
+  .field figure,
+  .arch,
+  .contact{transition:background-color .25s ease,color .25s ease,border-color .25s ease}
+
+  /* ---- botão de tema ---- */
+  .tema{
+    display:inline-flex;align-items:center;gap:.45rem;
+    font-family:var(--sans);font-size:.85rem;font-weight:600;
+    color:var(--ink-2);background:transparent;
+    border:1px solid var(--rule);border-radius:1px;
+    padding:.4rem .75rem;cursor:pointer;line-height:1;
+  }
+  .tema:hover{color:var(--ink);border-color:var(--ink-2)}
+  .tema svg{width:15px;height:15px;flex:none}
+  :root[data-tema="claro"] .tema .ico-sol{display:none}
+  :root:not([data-tema="claro"]) .tema .ico-lua{display:none}
+
+  @media (prefers-reduced-motion:reduce){
+    body,.panel,.field figure,.arch,.contact{transition:none}
   }
 
   *{box-sizing:border-box}
@@ -70,15 +139,15 @@
   .lede{margin:0 0 1.8rem;color:var(--ink-2);max-width:48ch}
   .actions{display:flex;gap:1.4rem;align-items:center;flex-wrap:wrap;font-family:var(--sans)}
   .btn{
-    background:var(--ink);color:var(--paper);text-decoration:none;
+    background:var(--btn-bg);color:var(--btn-ink);text-decoration:none;
     font-weight:600;font-size:.98rem;padding:.85rem 1.5rem;border-radius:1px;
   }
-  .btn:hover{background:var(--cool)}
+  .btn:hover{background:var(--cool);color:var(--btn-hover-ink)}
   .btn-quiet{font-size:.98rem;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--rule)}
   .btn-quiet:hover{color:var(--ink);border-bottom-color:var(--ink)}
 
   /* ---------------- painel do plano ---------------- */
-  .panel{border:1px solid var(--rule);background:rgba(255,255,255,.42);backdrop-filter:blur(2px)}
+  .panel{border:1px solid var(--rule);background:var(--surface);backdrop-filter:blur(2px)}
   .panel-bar{
     display:flex;justify-content:space-between;align-items:center;gap:1rem;
     padding:.85rem 1.1rem;border-bottom:1px solid var(--rule);flex-wrap:wrap;
@@ -92,7 +161,7 @@
     padding:.5rem 1.05rem;cursor:pointer;
   }
   .toggle button + button{border-left:1px solid var(--rule)}
-  .toggle button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .toggle button[aria-pressed="true"]{background:var(--btn-bg);color:var(--btn-ink)}
 
   .stage{position:relative;padding:1rem .6rem}
   .stage svg{width:100%;height:auto}
@@ -101,7 +170,7 @@
   .stage .plan-layer{display:none}
   .stage .plan-layer.is-active{display:block}
 
-  .node-box{fill:rgba(255,255,255,.9);stroke:var(--rule);stroke-width:1}
+  .node-box{fill:var(--node-fill);stroke:var(--rule);stroke-width:1}
   .node-box.hot{stroke:var(--hot);stroke-width:2}
   .node-box.cool{stroke:var(--cool);stroke-width:2}
   .node-t{font-family:var(--sans);font-size:12px;font-weight:600;fill:var(--ink)}
@@ -134,7 +203,7 @@
   .sec-intro{margin:0 0 3.2rem;max-width:56ch;color:var(--ink-2)}
 
   .fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2.6rem}
-  .field figure{margin:0 0 1.2rem;border:1px solid var(--rule);background:rgba(255,255,255,.42);padding:1rem}
+  .field figure{margin:0 0 1.2rem;border:1px solid var(--rule);background:var(--surface);padding:1rem}
   .field figure svg{display:block;width:100%;height:auto}
   .field h3{font-family:var(--sans);font-size:1.18rem;font-weight:600;margin:0 0 .6rem;letter-spacing:-.02em}
   .field p{margin:0 0 1rem;font-size:1rem}
@@ -163,26 +232,26 @@
   .case-body dd.result{font-family:var(--sans);font-weight:600;font-size:.98rem;color:var(--cool)}
 
   /* ---------------- ambiente ---------------- */
-  .arch{border:1px solid var(--rule);background:rgba(255,255,255,.42);padding:1.4rem}
+  .arch{border:1px solid var(--rule);background:var(--surface);padding:1.4rem}
   .arch svg{display:block;width:100%;height:auto}
   .arch-t{font-family:var(--sans);font-size:12px;font-weight:600;fill:var(--ink)}
   .arch-s{font-family:var(--mono);font-size:9px;fill:var(--ink-2)}
-  .arch-box{fill:rgba(255,255,255,.85);stroke:var(--rule)}
+  .arch-box{fill:var(--node-fill-2);stroke:var(--rule)}
   .arch-line{stroke:var(--ink-2);opacity:.5;fill:none}
   .arch-line.warn{stroke:var(--hot);opacity:.85;stroke-dasharray:5 4}
 
   /* ---------------- contato ---------------- */
-  .contact{background:var(--ink);color:var(--paper);border-top:0}
-  .contact .sec-title{color:var(--paper);max-width:18ch}
-  .contact .sec-tick{background:rgba(231,233,227,.25)}
-  .contact p{color:rgba(231,233,227,.72);max-width:52ch}
+  .contact{background:var(--contact-bg);color:var(--contact-ink);border-top:1px solid var(--rule)}
+  .contact .sec-title{color:var(--contact-ink);max-width:18ch}
+  .contact .sec-tick{background:var(--contact-rule)}
+  .contact p{color:var(--contact-ink-2);max-width:52ch}
   .mail{
     font-family:var(--sans);font-weight:600;font-size:clamp(1.25rem,3.4vw,2.1rem);
-    color:var(--paper);text-decoration:none;border-bottom:2px solid var(--warm);
+    color:var(--contact-ink);text-decoration:none;border-bottom:2px solid var(--warm);
     display:inline-block;margin-top:1rem;letter-spacing:-.025em;
   }
   .mail:hover{color:var(--warm)}
-  .aside{font-family:var(--mono);font-size:.72rem;color:rgba(231,233,227,.5);margin-top:2.4rem}
+  .aside{font-family:var(--mono);font-size:.72rem;color:var(--contact-ink-2);margin-top:2.4rem}
 
   footer{padding:1.8rem 0 3rem;font-family:var(--mono);font-size:.72rem;color:var(--ink-2);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
@@ -212,7 +281,7 @@
   @keyframes draw{to{stroke-dashoffset:0}}
   @keyframes rise{to{opacity:1}}
   @keyframes flash{
-    0%{background:rgba(188,138,28,.32)}
+    0%{background:var(--flash)}
     100%{background:transparent}
   }
   @media (prefers-reduced-motion:reduce){
@@ -224,15 +293,26 @@
     .readout dd.changed{animation:none}
   }
 </style>
+<script>
+// Define o tema antes da renderização, evitando piscada na troca de página.
+(function () {
+  var salvo = null;
+  try { salvo = window.localStorage.getItem('tema'); } catch (e) { salvo = null; }
+  var prefereClaro = window.matchMedia &&
+                     window.matchMedia('(prefers-color-scheme: light)').matches;
+  var tema = salvo || (prefereClaro ? 'claro' : 'escuro');
+  document.documentElement.setAttribute('data-tema', tema);
+})();
+</script>
 </head>
 <body>
 
 <header class="wrap top">
   <a class="mark" href="#topo">
     <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true">
-      <ellipse cx="15" cy="7.5" rx="10.5" ry="4" fill="none" stroke="#14312E" stroke-width="1.6"/>
-      <path d="M4.5 7.5v7c0 2.2 4.7 4 10.5 4s10.5-1.8 10.5-4v-7" fill="none" stroke="#14312E" stroke-width="1.6"/>
-      <path d="M4.5 14.5v7c0 2.2 4.7 4 10.5 4s10.5-1.8 10.5-4v-7" fill="none" stroke="#BC8A1C" stroke-width="1.6"/>
+      <ellipse cx="15" cy="7.5" rx="10.5" ry="4" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+      <path d="M4.5 7.5v7c0 2.2 4.7 4 10.5 4s10.5-1.8 10.5-4v-7" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+      <path d="M4.5 14.5v7c0 2.2 4.7 4 10.5 4s10.5-1.8 10.5-4v-7" fill="none" stroke="var(--warm)" stroke-width="1.6"/>
     </svg>
     <span style="display:flex;flex-direction:column;line-height:1.25">
       <b>Marcos</b>
@@ -244,6 +324,16 @@
     <a href="#casos">Casos</a>
     <a href="#ambiente">Ambiente</a>
     <a href="#contato">Contato</a>
+    <button class="tema" id="temaBtn" type="button">
+      <svg class="ico-sol" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+        <circle cx="8" cy="8" r="3.2"/>
+        <path d="M8 1v1.8M8 13.2V15M1 8h1.8M13.2 8H15M3 3l1.3 1.3M11.7 11.7 13 13M13 3l-1.3 1.3M4.3 11.7 3 13"/>
+      </svg>
+      <svg class="ico-lua" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round">
+        <path d="M13.4 9.6A5.8 5.8 0 0 1 6.4 2.6 6 6 0 1 0 13.4 9.6Z"/>
+      </svg>
+      <span id="temaTexto">Claro</span>
+    </button>
   </nav>
 </header>
 
@@ -283,14 +373,14 @@
             <text class="node-t" x="608" y="60">Clustered Index Scan</text>
             <text class="node-s" x="608" y="75">tabela de pedidos</text>
             <text class="cost hot" x="608" y="92">custo 67%</text>
-            <rect x="608" y="96" width="93" height="3" fill="#A63A2E"/>
+            <rect x="608" y="96" width="93" height="3" fill="var(--hot)"/>
           </g>
           <g class="rise" style="animation-delay:.15s">
             <rect class="node-box" x="596" y="196" width="160" height="62"/>
             <text class="node-t" x="608" y="216">Index Seek</text>
             <text class="node-s" x="608" y="231">cadastro de clientes</text>
             <text class="cost ok" x="608" y="248">custo 3%</text>
-            <rect x="608" y="252" width="8" height="3" fill="#2C7062"/>
+            <rect x="608" y="252" width="8" height="3" fill="var(--cool)"/>
           </g>
           <path class="edge hot draw" style="--len:120;animation-delay:.3s" d="M596,71 C556,71 566,148 524,148" stroke-width="9"/>
           <path class="edge draw" style="--len:120;animation-delay:.35s" d="M596,227 C556,227 566,148 524,148" stroke-width="2"/>
@@ -330,14 +420,14 @@
             <text class="node-t" x="608" y="60">Index Seek</text>
             <text class="node-s" x="608" y="75">tabela de pedidos</text>
             <text class="cost ok" x="608" y="92">custo 34%</text>
-            <rect x="608" y="96" width="47" height="3" fill="#2C7062"/>
+            <rect x="608" y="96" width="47" height="3" fill="var(--cool)"/>
           </g>
           <g class="rise" style="animation-delay:.15s">
             <rect class="node-box cool" x="596" y="196" width="160" height="62"/>
             <text class="node-t" x="608" y="216">Index Seek</text>
             <text class="node-s" x="608" y="231">cadastro de clientes</text>
             <text class="cost ok" x="608" y="248">custo 12%</text>
-            <rect x="608" y="252" width="17" height="3" fill="#2C7062"/>
+            <rect x="608" y="252" width="17" height="3" fill="var(--cool)"/>
           </g>
           <path class="edge draw" style="--len:120;animation-delay:.3s" d="M596,71 C556,71 566,148 524,148" stroke-width="2.5"/>
           <path class="edge draw" style="--len:120;animation-delay:.35s" d="M596,227 C556,227 566,148 524,148" stroke-width="2"/>
@@ -348,7 +438,7 @@
             <text class="node-t" x="376" y="137">Nested Loops</text>
             <text class="node-s" x="376" y="152">junção</text>
             <text class="cost ok" x="376" y="169">custo 39%</text>
-            <text class="edge-l" x="376" y="196" style="fill:#2C7062">sem spill em TempDB</text>
+            <text class="edge-l" x="376" y="196" style="fill:var(--cool)">sem spill em TempDB</text>
           </g>
           <path class="edge draw" style="--len:60;animation-delay:.55s" d="M364,148 L344,148" stroke-width="2"/>
 
@@ -366,7 +456,7 @@
             <text class="node-s" x="36" y="152">retorno ao usuário</text>
             <text class="cost ok" x="36" y="169">custo 0%</text>
           </g>
-          <text class="edge-l rise" style="animation-delay:.85s;fill:#2C7062" x="24" y="222">plano concluído pelo otimizador — objeto mantido como view</text>
+          <text class="edge-l rise" style="animation-delay:.85s;fill:var(--cool)" x="24" y="222">plano concluído pelo otimizador — objeto mantido como view</text>
         </svg>
       </div>
 
@@ -401,15 +491,15 @@
       <article class="field">
         <figure>
           <svg viewBox="0 0 220 96" role="img" aria-label="Ilustração de plano de execução com um nó de custo alto destacado.">
-            <rect x="8" y="34" width="52" height="28" fill="none" stroke="#4E6663"/>
-            <rect x="84" y="34" width="52" height="28" fill="none" stroke="#4E6663"/>
-            <rect x="160" y="8" width="52" height="28" fill="none" stroke="#A63A2E" stroke-width="2"/>
-            <rect x="160" y="60" width="52" height="28" fill="none" stroke="#4E6663"/>
-            <path d="M160,22 C146,22 150,48 136,48" fill="none" stroke="#A63A2E" stroke-width="6" opacity=".8"/>
-            <path d="M160,74 C146,74 150,48 136,48" fill="none" stroke="#4E6663" stroke-width="1.5" opacity=".6"/>
-            <path d="M84,48 L60,48" stroke="#4E6663" stroke-width="3" opacity=".6"/>
-            <rect x="164" y="27" width="34" height="3" fill="#A63A2E"/>
-            <rect x="88" y="53" width="12" height="3" fill="#2C7062"/>
+            <rect x="8" y="34" width="52" height="28" fill="none" stroke="var(--ink-2)"/>
+            <rect x="84" y="34" width="52" height="28" fill="none" stroke="var(--ink-2)"/>
+            <rect x="160" y="8" width="52" height="28" fill="none" stroke="var(--hot)" stroke-width="2"/>
+            <rect x="160" y="60" width="52" height="28" fill="none" stroke="var(--ink-2)"/>
+            <path d="M160,22 C146,22 150,48 136,48" fill="none" stroke="var(--hot)" stroke-width="6" opacity=".8"/>
+            <path d="M160,74 C146,74 150,48 136,48" fill="none" stroke="var(--ink-2)" stroke-width="1.5" opacity=".6"/>
+            <path d="M84,48 L60,48" stroke="var(--ink-2)" stroke-width="3" opacity=".6"/>
+            <rect x="164" y="27" width="34" height="3" fill="var(--hot)"/>
+            <rect x="88" y="53" width="12" height="3" fill="var(--cool)"/>
           </svg>
         </figure>
         <h3>Performance de banco</h3>
@@ -427,19 +517,19 @@
       <article class="field">
         <figure>
           <svg viewBox="0 0 220 96" role="img" aria-label="Ilustração comparando pilhas de fontes compilados entre homologação e produção, com uma divergência marcada.">
-            <text x="8" y="14" font-family="JetBrains Mono, monospace" font-size="9" fill="#4E6663">homologação</text>
-            <text x="132" y="14" font-family="JetBrains Mono, monospace" font-size="9" fill="#4E6663">produção</text>
-            <g fill="none" stroke="#4E6663">
+            <text x="8" y="14" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-2)">homologação</text>
+            <text x="132" y="14" font-family="JetBrains Mono, monospace" font-size="9" fill="var(--ink-2)">produção</text>
+            <g fill="none" stroke="var(--ink-2)">
               <rect x="8" y="22" width="72" height="12"/><rect x="8" y="38" width="72" height="12"/>
               <rect x="8" y="54" width="72" height="12"/><rect x="8" y="70" width="72" height="12"/>
             </g>
-            <g fill="none" stroke="#4E6663">
+            <g fill="none" stroke="var(--ink-2)">
               <rect x="132" y="22" width="72" height="12"/><rect x="132" y="38" width="72" height="12"/>
               <rect x="132" y="70" width="72" height="12"/>
             </g>
-            <rect x="132" y="54" width="72" height="12" fill="none" stroke="#A63A2E" stroke-width="2"/>
-            <path d="M80,28 L132,28 M80,44 L132,44 M80,76 L132,76" stroke="#4E6663" opacity=".45"/>
-            <path d="M80,60 L132,60" stroke="#A63A2E" stroke-dasharray="4 3"/>
+            <rect x="132" y="54" width="72" height="12" fill="none" stroke="var(--hot)" stroke-width="2"/>
+            <path d="M80,28 L132,28 M80,44 L132,44 M80,76 L132,76" stroke="var(--ink-2)" opacity=".45"/>
+            <path d="M80,60 L132,60" stroke="var(--hot)" stroke-dasharray="4 3"/>
           </svg>
         </figure>
         <h3>Protheus por dentro</h3>
@@ -456,18 +546,18 @@
       <article class="field">
         <figure>
           <svg viewBox="0 0 220 96" role="img" aria-label="Ilustração de dois bancos de dados ligados por um processo intermediário de carga.">
-            <g fill="none" stroke="#4E6663" stroke-width="1.5">
+            <g fill="none" stroke="var(--ink-2)" stroke-width="1.5">
               <ellipse cx="34" cy="30" rx="24" ry="8"/>
               <path d="M10,30v34c0,4.4 10.7,8 24,8s24-3.6 24-8V30"/>
               <ellipse cx="186" cy="30" rx="24" ry="8"/>
               <path d="M162,30v34c0,4.4 10.7,8 24,8s24-3.6 24-8V30"/>
             </g>
-            <rect x="86" y="34" width="48" height="26" fill="none" stroke="#2C7062" stroke-width="2"/>
-            <text x="94" y="51" font-family="JetBrains Mono, monospace" font-size="10" fill="#2C7062">ETL</text>
-            <path d="M58,47 L86,47" stroke="#4E6663"/>
-            <path d="M134,47 L162,47" stroke="#4E6663"/>
-            <path d="M58,80 C110,92 118,92 162,80" stroke="#A63A2E" stroke-dasharray="4 3" fill="none"/>
-            <text x="76" y="93" font-family="JetBrains Mono, monospace" font-size="8.5" fill="#A63A2E">rota direta descartada</text>
+            <rect x="86" y="34" width="48" height="26" fill="none" stroke="var(--cool)" stroke-width="2"/>
+            <text x="94" y="51" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--cool)">ETL</text>
+            <path d="M58,47 L86,47" stroke="var(--ink-2)"/>
+            <path d="M134,47 L162,47" stroke="var(--ink-2)"/>
+            <path d="M58,80 C110,92 118,92 162,80" stroke="var(--hot)" stroke-dasharray="4 3" fill="none"/>
+            <text x="76" y="93" font-family="JetBrains Mono, monospace" font-size="8.5" fill="var(--hot)">rota direta descartada</text>
           </svg>
         </figure>
         <h3>Integração entre bases</h3>
@@ -491,11 +581,11 @@
     <details class="case">
       <summary>
         <svg viewBox="0 0 170 52" aria-hidden="true">
-          <path d="M0,46 H170" stroke="#4E6663" opacity=".3"/>
-          <path d="M4,44 L26,42 L48,41 L70,40 L92,39 L114,38 L136,37 L158,36" fill="none" stroke="#4E6663" opacity=".4" stroke-dasharray="3 3"/>
-          <path d="M4,44 L26,40 L48,33 L70,26 L92,18 L114,12 L136,8 L158,5" fill="none" stroke="#A63A2E" stroke-width="2"/>
-          <circle cx="158" cy="5" r="3" fill="#A63A2E"/>
-          <text x="0" y="12" font-family="JetBrains Mono, monospace" font-size="8" fill="#4E6663">tempo × volume</text>
+          <path d="M0,46 H170" stroke="var(--ink-2)" opacity=".3"/>
+          <path d="M4,44 L26,42 L48,41 L70,40 L92,39 L114,38 L136,37 L158,36" fill="none" stroke="var(--ink-2)" opacity=".4" stroke-dasharray="3 3"/>
+          <path d="M4,44 L26,40 L48,33 L70,26 L92,18 L114,12 L136,8 L158,5" fill="none" stroke="var(--hot)" stroke-width="2"/>
+          <circle cx="158" cy="5" r="3" fill="var(--hot)"/>
+          <text x="0" y="12" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-2)">tempo × volume</text>
         </svg>
         <span class="case-name">View de pedidos demora minutos para abrir</span>
         <span class="sign" aria-hidden="true"></span>
@@ -516,12 +606,12 @@
     <details class="case">
       <summary>
         <svg viewBox="0 0 170 52" aria-hidden="true">
-          <path d="M0,46 H170" stroke="#4E6663" opacity=".3"/>
-          <g fill="#2C7062"><rect x="6" y="34" width="12" height="12"/><rect x="24" y="32" width="12" height="14"/><rect x="42" y="35" width="12" height="11"/></g>
-          <g fill="#A63A2E"><rect x="60" y="8" width="12" height="38"/><rect x="78" y="6" width="12" height="40"/></g>
-          <g fill="#2C7062"><rect x="96" y="33" width="12" height="13"/></g>
-          <g fill="#A63A2E"><rect x="114" y="10" width="12" height="36"/><rect x="132" y="7" width="12" height="39"/><rect x="150" y="12" width="12" height="34"/></g>
-          <text x="0" y="12" font-family="JetBrains Mono, monospace" font-size="8" fill="#4E6663">execuções</text>
+          <path d="M0,46 H170" stroke="var(--ink-2)" opacity=".3"/>
+          <g fill="var(--cool)"><rect x="6" y="34" width="12" height="12"/><rect x="24" y="32" width="12" height="14"/><rect x="42" y="35" width="12" height="11"/></g>
+          <g fill="var(--hot)"><rect x="60" y="8" width="12" height="38"/><rect x="78" y="6" width="12" height="40"/></g>
+          <g fill="var(--cool)"><rect x="96" y="33" width="12" height="13"/></g>
+          <g fill="var(--hot)"><rect x="114" y="10" width="12" height="36"/><rect x="132" y="7" width="12" height="39"/><rect x="150" y="12" width="12" height="34"/></g>
+          <text x="0" y="12" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-2)">execuções</text>
         </svg>
         <span class="case-name">Procedure rápida em homologação, lenta em produção</span>
         <span class="sign" aria-hidden="true"></span>
@@ -542,12 +632,12 @@
     <details class="case">
       <summary>
         <svg viewBox="0 0 170 52" aria-hidden="true">
-          <path d="M0,46 H170" stroke="#4E6663" opacity=".3"/>
-          <path d="M4,40 L20,36 L36,30 L52,22 L68,14 L84,8" fill="none" stroke="#4E6663" stroke-width="2"/>
-          <path d="M84,8 L88,20 L92,10 L96,26" fill="none" stroke="#A63A2E" stroke-width="2"/>
-          <path d="M96,26 L170,44" fill="none" stroke="#A63A2E" stroke-width="2" stroke-dasharray="4 3"/>
-          <circle cx="96" cy="26" r="3.5" fill="#A63A2E"/>
-          <text x="102" y="20" font-family="JetBrains Mono, monospace" font-size="8" fill="#A63A2E">queda</text>
+          <path d="M0,46 H170" stroke="var(--ink-2)" opacity=".3"/>
+          <path d="M4,40 L20,36 L36,30 L52,22 L68,14 L84,8" fill="none" stroke="var(--ink-2)" stroke-width="2"/>
+          <path d="M84,8 L88,20 L92,10 L96,26" fill="none" stroke="var(--hot)" stroke-width="2"/>
+          <path d="M96,26 L170,44" fill="none" stroke="var(--hot)" stroke-width="2" stroke-dasharray="4 3"/>
+          <circle cx="96" cy="26" r="3.5" fill="var(--hot)"/>
+          <text x="102" y="20" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--hot)">queda</text>
         </svg>
         <span class="case-name">Instância cai durante carga de alto volume</span>
         <span class="sign" aria-hidden="true"></span>
@@ -568,12 +658,12 @@
     <details class="case">
       <summary>
         <svg viewBox="0 0 170 52" aria-hidden="true">
-          <rect x="4" y="10" width="140" height="30" fill="none" stroke="#4E6663"/>
-          <rect x="4" y="10" width="140" height="30" fill="#A63A2E" opacity=".14"/>
-          <rect x="4" y="10" width="52" height="30" fill="#2C7062" opacity=".35"/>
-          <path d="M144,4 V46" stroke="#A63A2E" stroke-width="2"/>
-          <text x="60" y="29" font-family="JetBrains Mono, monospace" font-size="8" fill="#4E6663">espaço retido</text>
-          <text x="4" y="52" font-family="JetBrains Mono, monospace" font-size="8" fill="#2C7062">dados reais</text>
+          <rect x="4" y="10" width="140" height="30" fill="none" stroke="var(--ink-2)"/>
+          <rect x="4" y="10" width="140" height="30" fill="var(--hot)" opacity=".14"/>
+          <rect x="4" y="10" width="52" height="30" fill="var(--cool)" opacity=".35"/>
+          <path d="M144,4 V46" stroke="var(--hot)" stroke-width="2"/>
+          <text x="60" y="29" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--ink-2)">espaço retido</text>
+          <text x="4" y="52" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--cool)">dados reais</text>
         </svg>
         <span class="case-name">Tablespace estoura o limite do Oracle XE após um TRUNCATE</span>
         <span class="sign" aria-hidden="true"></span>
@@ -594,17 +684,17 @@
     <details class="case">
       <summary>
         <svg viewBox="0 0 170 52" aria-hidden="true">
-          <g fill="none" stroke="#4E6663">
+          <g fill="none" stroke="var(--ink-2)">
             <rect x="4" y="8" width="58" height="9"/><rect x="4" y="21" width="58" height="9"/>
             <rect x="4" y="34" width="58" height="9"/>
           </g>
-          <g fill="none" stroke="#4E6663">
+          <g fill="none" stroke="var(--ink-2)">
             <rect x="108" y="8" width="58" height="9"/><rect x="108" y="34" width="58" height="9"/>
           </g>
-          <rect x="108" y="21" width="58" height="9" fill="none" stroke="#A63A2E" stroke-width="2"/>
-          <path d="M62,12 H108 M62,38 H108" stroke="#4E6663" opacity=".45"/>
-          <path d="M62,25 H108" stroke="#A63A2E" stroke-dasharray="4 3"/>
-          <text x="108" y="52" font-family="JetBrains Mono, monospace" font-size="8" fill="#A63A2E">só em produção</text>
+          <rect x="108" y="21" width="58" height="9" fill="none" stroke="var(--hot)" stroke-width="2"/>
+          <path d="M62,12 H108 M62,38 H108" stroke="var(--ink-2)" opacity=".45"/>
+          <path d="M62,25 H108" stroke="var(--hot)" stroke-dasharray="4 3"/>
+          <text x="108" y="52" font-family="JetBrains Mono, monospace" font-size="8" fill="var(--hot)">só em produção</text>
         </svg>
         <span class="case-name">Ninguém sabe o que está compilado em produção</span>
         <span class="sign" aria-hidden="true"></span>
@@ -648,7 +738,7 @@
 
         <!-- bancos -->
         <text class="arch-s" x="490" y="24">persistência</text>
-        <rect class="arch-box" x="490" y="34" width="160" height="54" stroke="#2C7062" stroke-width="2"/>
+        <rect class="arch-box" x="490" y="34" width="160" height="54" stroke="var(--cool)" stroke-width="2"/>
         <text class="arch-t" x="504" y="58">SQL Server</text>
         <text class="arch-s" x="504" y="74">transacional Protheus</text>
 
@@ -658,7 +748,7 @@
 
         <!-- etl e destino -->
         <text class="arch-s" x="730" y="24">distribuição</text>
-        <rect class="arch-box" x="730" y="34" width="150" height="54" stroke="#BC8A1C" stroke-width="2"/>
+        <rect class="arch-box" x="730" y="34" width="150" height="54" stroke="var(--warm)" stroke-width="2"/>
         <text class="arch-t" x="744" y="58">ETL externo</text>
         <text class="arch-s" x="744" y="74">janela agendada</text>
 
@@ -677,10 +767,10 @@
         <path class="arch-line warn" d="M650,177 C690,177 690,120 730,120"/>
 
         <!-- régua de janela -->
-        <path d="M20,258 H960" stroke="#4E6663" opacity=".35"/>
-        <rect x="20" y="248" width="150" height="10" fill="#2C7062" opacity=".3"/>
-        <rect x="170" y="248" width="620" height="10" fill="#A63A2E" opacity=".18"/>
-        <rect x="790" y="248" width="170" height="10" fill="#2C7062" opacity=".3"/>
+        <path d="M20,258 H960" stroke="var(--ink-2)" opacity=".35"/>
+        <rect x="20" y="248" width="150" height="10" fill="var(--cool)" opacity=".3"/>
+        <rect x="170" y="248" width="620" height="10" fill="var(--hot)" opacity=".18"/>
+        <rect x="790" y="248" width="170" height="10" fill="var(--cool)" opacity=".3"/>
         <text class="arch-s" x="20" y="278">00h — janela livre</text>
         <text class="arch-s" x="380" y="278">operação em pico</text>
         <text class="arch-s" x="860" y="278">23h59</text>
@@ -785,6 +875,31 @@
   });
 
   render('antes');
+})();
+</script>
+
+
+<script>
+(function () {
+  var raiz   = document.documentElement;
+  var botao  = document.getElementById('temaBtn');
+  var texto  = document.getElementById('temaTexto');
+
+  function aplicar(tema) {
+    raiz.setAttribute('data-tema', tema);
+    var proximo = tema === 'claro' ? 'escuro' : 'claro';
+    texto.textContent = proximo === 'claro' ? 'Claro' : 'Escuro';
+    botao.setAttribute('aria-label', 'Alternar para o tema ' + proximo);
+    botao.setAttribute('title', 'Alternar para o tema ' + proximo);
+    // O armazenamento pode estar bloqueado; a troca funciona mesmo sem persistência.
+    try { window.localStorage.setItem('tema', tema); } catch (e) {}
+  }
+
+  aplicar(raiz.getAttribute('data-tema') || 'escuro');
+
+  botao.addEventListener('click', function () {
+    aplicar(raiz.getAttribute('data-tema') === 'claro' ? 'escuro' : 'claro');
+  });
 })();
 </script>
 

@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Marcos Paulo | Backend • Dados • Automação • IA</title>
+
+<meta name="description"
+      content="Marcos Paulo — Desenvolvimento backend, bancos de dados, APIs, automação, integração de sistemas e soluções com IA.">
+
+<style>
+    :root {
+        --bg: #0a0e14;
+        --bg-secondary: #0f151e;
+        --card: #131b26;
+        --card-hover: #182332;
+        --border: #263241;
+
+        --text: #f1f5f9;
+        --text-secondary: #9ba8b7;
+
+        --accent: #38bdf8;
+        --accent-secondary: #22c55e;
+
+        --max-width: 1180px;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family:
+            Inter,
+            "Segoe UI",
+            Roboto,
+            Arial,
+            sans-serif;
+
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .container {
+        width: min(100% - 40px, var(--max-width));
+        margin: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+
+        z-index: 1000;
+
+        background: rgba(10, 14, 20, 0.82);
+        backdrop-filter: blur(14px);
+
+        border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav {
+        height: 72px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .logo {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .logo span {
+        color: var(--accent);
+    }
+
+    nav ul {
+        list-style: none;
+
+        display: flex;
+        gap: 28px;
+    }
+
+    nav a {
+        color: var(--text-secondary);
+        font-size: 14px;
+
+        transition: .2s;
+    }
+
+    nav a:hover {
+        color: var(--text);
+    }
+
+    .menu-button {
+        display: none;
+
+        background: none;
+        border: none;
+        color: white;
+
+        font-size: 25px;
+        cursor: pointer;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero {
+        min-height: 100vh;
+
+        display: flex;
+        align-items: center;
+
+        padding-top: 72px;
+
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: "";
+
+        position: absolute;
+
+        width: 600px;
+        height: 600px;
+
+        right: -250px;
+        top: 50px;
+
+        background: rgba(56,189,248,.08);
+
+        filter: blur(100px);
+        border-radius: 50%;
+    }
+
+    .hero-content {
+        max-width: 850px;
+
+        position: relative;
+        z-index: 1;
+    }
+
+    .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+
+        color: var(--accent);
+
+        font-size: 14px;
+        font-weight: 600;
+
+        margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+        content: "";
+
+        width: 8px;
+        height: 8px;
+
+        background: var(--accent-secondary);
+
+        border-radius: 50%;
+    }
+
+    h1 {
+        font-size: clamp(44px, 7vw, 78px);
+
+        line-height: 1.03;
+        letter-spacing: -3px;
+
+        margin-bottom: 26px;
+    }
+
+    h1 span {
+        color: var(--accent);
+    }
+
+    .hero-description {
+        max-width: 720px;
+
+        color: var(--text-secondary);
+
+        font-size: 20px;
+        line-height: 1.7;
+
+        margin-bottom: 38px;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 13px 22px;
+
+        border-radius: 8px;
+
+        font-weight: 600;
+        font-size: 14px;
+
+        transition: .2s;
+    }
+
+    .button-primary {
+        background: var(--accent);
+        color: #061018;
+    }
+
+    .button-primary:hover {
+        transform: translateY(-2px);
+        filter: brightness(1.08);
+    }
+
+    .button-secondary {
+        border: 1px solid var(--border);
+        color: var(--text);
+    }
+
+    .button-secondary:hover {
+        background: var(--card);
+    }
+
+    /* =========================
+       SECTIONS
+    ========================== */
+
+    section {
+        padding: 110px 0;
+    }
+
+    .section-header {
+        max-width: 700px;
+        margin-bottom: 50px;
+    }
+
+    .section-label {
+        color: var(--accent);
+
+        font-size: 13px;
+        font-weight: 700;
+
+        text-transform: uppercase;
+        letter-spacing: 2px;
+
+        margin-bottom: 12px;
+    }
+
+    h2 {
+        font-size: clamp(30px, 4vw, 44px);
+        letter-spacing: -1.5px;
+
+        margin-bottom: 15px;
+    }
+
+    .section-description {
+        color: var(--text-secondary);
+        font-size: 17px;
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+
+    .about {
+        background: var(--bg-secondary);
+    }
+
+    .about-grid {
+        display: grid;
+
+        grid-template-columns: 1.2fr .8fr;
+
+        gap: 70px;
+
+        align-items: start;
+    }
+
+    .about-text p {
+        color: var(--text-secondary);
+
+        margin-bottom: 18px;
+
+        font-size: 17px;
+    }
+
+    .about-highlight {
+        border-left: 2px solid var(--accent);
+
+        padding-left: 24px;
+
+        color: var(--text);
+        font-size: 19px;
+    }
+
+    /* =========================
+       SKILLS
+    ========================== */
+
+    .skills-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 18px;
+    }
+
+    .skill-card {
+        background: var(--card);
+
+        border: 1px solid var(--border);
+
+        border-radius: 12px;
+
+        padding: 28px;
+
+        transition: .25s;
+    }
+
+    .skill-card:hover {
+        background: var(--card-hover);
+
+        transform: translateY(-4px);
+
+        border-color: #344457;
+    }
+
+    .skill-icon {
+        font-size: 27px;
+
+        margin-bottom: 18px;
+    }
+
+    .skill-card h3 {
+        font-size: 18px;
+        margin-bottom: 9px;
+    }
+
+    .skill-card p {
+        color: var(--text-secondary);
+        font-size: 14px;
+    }
+
+    /* =========================
+       PROJECTS
+    ========================== */
+
+    .projects {
+        background: var(--bg-secondary);
+    }
+
+    .projects-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 20px;
+    }
+
+    .project {
+        background: var(--card);
+
+        border: 1px solid var(--border);
+
+        border-radius: 12px;
+
+        padding: 32px;
+
+        transition: .25s;
+    }
+
+    .project:hover {
+        transform: translateY(-4px);
+        background: var(--card-hover);
+    }
+
+    .project-type {
+        color: var(--accent);
+
+        font-size: 12px;
+        font-weight: 700;
+
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        margin-bottom: 12px;
+    }
+
+    .project h3 {
+        font-size: 22px;
+        margin-bottom: 12px;
+    }
+
+    .project p {
+        color: var(--text-secondary);
+
+        font-size: 15px;
+
+        margin-bottom: 20px;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tag {
+        padding: 5px 9px;
+
+        background: rgba(255,255,255,.04);
+
+        border: 1px solid var(--border);
+
+        border-radius: 5px;
+
+        color: #b8c4d1;
+
+        font-size: 12px;
+    }
+
+    /* =========================
+       APPROACH
+    ========================== */
+
+    .approach-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 20px;
+    }
+
+    .approach-item {
+        padding-top: 20px;
+
+        border-top: 1px solid var(--border);
+    }
+
+    .approach-number {
+        color: var(--accent);
+
+        font-size: 13px;
+        font-weight: 700;
+
+        margin-bottom: 18px;
+    }
+
+    .approach-item h3 {
+        margin-bottom: 10px;
+    }
+
+    .approach-item p {
+        color: var(--text-secondary);
+        font-size: 14px;
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+
+    .contact {
+        background: var(--bg-secondary);
+
+        text-align: center;
+    }
+
+    .contact-content {
+        max-width: 720px;
+        margin: auto;
+    }
+
+    .contact h2 {
+        margin-bottom: 20px;
+    }
+
+    .contact p {
+        color: var(--text-secondary);
+
+        font-size: 18px;
+
+        margin-bottom: 32px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer {
+        padding: 28px 0;
+
+        border-top: 1px solid var(--border);
+
+        color: var(--text-secondary);
+
+        font-size: 13px;
+    }
+
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 850px) {
+
+        nav ul {
+            display: none;
+
+            position: absolute;
+
+            top: 72px;
+            left: 0;
+            right: 0;
+
+            background: var(--bg);
+
+            flex-direction: column;
+
+            padding: 25px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav ul.active {
+            display: flex;
+        }
+
+        .menu-button {
+            display: block;
+        }
+
+        .about-grid,
+        .projects-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .skills-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+        .approach-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 560px) {
+
+        .container {
+            width: min(100% - 28px, var(--max-width));
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1 {
+            letter-spacing: -2px;
+        }
+
+        .hero-description {
+            font-size: 17px;
+        }
+
+        .skills-grid,
+        .approach-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .footer-content {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+
+```
+    <a href="#" class="logo">
+        Marcos<span>.</span>
+    </a>
+
+    <nav>
+        <button class="menu-button" id="menuButton">
+            ☰
+        </button>
+
+        <ul id="menu">
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#especialidades">Especialidades</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#abordagem">Abordagem</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+
+</div>
+```
+
+</header>
+
+<main>
+
+```
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                Backend • Dados • Automação • IA
+            </div>
+
+            <h1>
+                Transformando sistemas
+                <span>complexos</span>
+                em soluções simples.
+            </h1>
+
+            <p class="hero-description">
+                Sou Marcos Paulo, desenvolvedor focado em backend,
+                bancos de dados, APIs, integração de sistemas,
+                automação e novas aplicações de inteligência artificial.
+            </p>
+
+            <div class="buttons">
+
+                <a href="#projetos"
+                   class="button button-primary">
+                    Conheça meus projetos
+                </a>
+
+                <a href="#contato"
+                   class="button button-secondary">
+                    Entre em contato
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SOBRE -->
+
+<section id="sobre" class="about">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Sobre
+            </div>
+
+            <h2>
+                Engenharia de software com foco no que realmente importa.
+            </h2>
+
+        </div>
+
+
+        <div class="about-grid">
+
+            <div class="about-text">
+
+                <p>
+                    Minha experiência está fortemente ligada ao desenvolvimento
+                    de sistemas que precisam funcionar de verdade:
+                    aplicações corporativas, bancos de dados,
+                    integrações, APIs e processos automatizados.
+                </p>
+
+                <p>
+                    Trabalho tanto com tecnologias modernas quanto com
+                    sistemas legados, buscando evoluir a arquitetura sem
+                    simplesmente descartar aquilo que já funciona.
+                </p>
+
+                <p>
+                    Nos últimos projetos, venho explorando também a aplicação
+                    prática de inteligência artificial e agentes autônomos,
+                    buscando integrar IA a sistemas e processos existentes.
+                </p>
+
+            </div>
+
+
+            <div class="about-highlight">
+
+                "A melhor solução não é necessariamente a mais complexa.
+                É aquela que resolve o problema com segurança,
+                desempenho e simplicidade."
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ESPECIALIDADES -->
+
+<section id="especialidades">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Especialidades
+            </div>
+
+            <h2>
+                Onde concentro minha experiência.
+            </h2>
+
+            <p class="section-description">
+                Uma combinação de desenvolvimento backend,
+                engenharia de dados e automação.
+            </p>
+
+        </div>
+
+
+        <div class="skills-grid">
+
+            <div class="skill-card">
+
+                <div class="skill-icon">⚙️</div>
+
+                <h3>Backend</h3>
+
+                <p>
+                    C#, .NET, ASP.NET Core, APIs REST,
+                    Minimal APIs, Dapper e aplicações corporativas.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">🗄️</div>
+
+                <h3>Bancos de dados</h3>
+
+                <p>
+                    SQL Server, Oracle e PostgreSQL,
+                    incluindo procedures, views, índices,
+                    jobs e otimização de consultas.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">🔗</div>
+
+                <h3>Integrações</h3>
+
+                <p>
+                    APIs, sistemas corporativos,
+                    processos de integração e comunicação
+                    entre diferentes plataformas.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">🚀</div>
+
+                <h3>Performance</h3>
+
+                <p>
+                    Análise de planos de execução,
+                    diagnóstico de gargalos e arquitetura
+                    orientada a baixa latência.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">🤖</div>
+
+                <h3>IA & Agentes</h3>
+
+                <p>
+                    Exploração de agentes de IA,
+                    automação inteligente e integração
+                    de modelos de linguagem a sistemas reais.
+                </p>
+
+            </div>
+
+
+            <div class="skill-card">
+
+                <div class="skill-icon">🔧</div>
+
+                <h3>Sistemas legados</h3>
+
+                <p>
+                    Manutenção, análise e modernização
+                    de aplicações existentes sem perder
+                    regras de negócio importantes.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PROJETOS -->
+
+<section id="projetos" class="projects">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Projetos
+            </div>
+
+            <h2>
+                Alguns projetos que representam meu trabalho.
+            </h2>
+
+        </div>
+
+
+        <div class="projects-grid">
+
+
+            <article class="project">
+
+                <div class="project-type">
+                    API • Backend
+                </div>
+
+                <h3>MApiDB</h3>
+
+                <p>
+                    API orientada a banco de dados para exposição
+                    controlada de consultas e procedures,
+                    utilizando uma arquitetura centralizada
+                    de configuração e controle de rotas.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">C#</span>
+                    <span class="tag">.NET</span>
+                    <span class="tag">ASP.NET Core</span>
+                    <span class="tag">SQL Server</span>
+                    <span class="tag">Dapper</span>
+
+                </div>
+
+            </article>
+
+
+            <article class="project">
+
+                <div class="project-type">
+                    Desktop • Monitoramento
+                </div>
+
+                <h3>MonitorSQLTrayApp</h3>
+
+                <p>
+                    Aplicação desktop para monitoramento periódico
+                    de views do SQL Server, com notificações
+                    automáticas quando novos dados são encontrados.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">C#</span>
+                    <span class="tag">WinForms</span>
+                    <span class="tag">.NET Framework</span>
+                    <span class="tag">SQL Server</span>
+
+                </div>
+
+            </article>
+
+
+            <article class="project">
+
+                <div class="project-type">
+                    IA • Automação
+                </div>
+
+                <h3>Agentes de IA</h3>
+
+                <p>
+                    Exploração de arquiteturas para agentes de IA
+                    capazes de executar tarefas diretamente em
+                    ambientes locais e dispositivos móveis.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">IA</span>
+                    <span class="tag">Agents</span>
+                    <span class="tag">OpenAI</span>
+                    <span class="tag">Claude</span>
+                    <span class="tag">Android</span>
+
+                </div>
+
+            </article>
+
+
+            <article class="project">
+
+                <div class="project-type">
+                    Modernização
+                </div>
+
+                <h3>Integração de sistemas</h3>
+
+                <p>
+                    Análise e modernização de processos corporativos
+                    envolvendo aplicações legadas, SQL Server,
+                    Oracle, APIs e automações.
+                </p>
+
+                <div class="tags">
+
+                    <span class="tag">SQL Server</span>
+                    <span class="tag">Oracle</span>
+                    <span class="tag">VB6</span>
+                    <span class="tag">APIs</span>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ABORDAGEM -->
+
+<section id="abordagem">
+
+    <div class="container">
+
+        <div class="section-header">
+
+            <div class="section-label">
+                Abordagem
+            </div>
+
+            <h2>
+                Como gosto de resolver problemas.
+            </h2>
+
+        </div>
+
+
+        <div class="approach-grid">
+
+            <div class="approach-item">
+
+                <div class="approach-number">
+                    01
+                </div>
+
+                <h3>Entender</h3>
+
+                <p>
+                    Antes de alterar código,
+                    entender o problema, o processo
+                    e as regras de negócio.
+                </p>
+
+            </div>
+
+
+            <div class="approach-item">
+
+                <div class="approach-number">
+                    02
+                </div>
+
+                <h3>Diagnosticar</h3>
+
+                <p>
+                    Identificar a causa real do problema,
+                    evitando soluções que apenas escondem
+                    os sintomas.
+                </p>
+
+            </div>
+
+
+            <div class="approach-item">
+
+                <div class="approach-number">
+                    03
+                </div>
+
+                <h3>Simplificar</h3>
+
+                <p>
+                    Buscar uma arquitetura clara,
+                    segura e proporcional à necessidade
+                    da aplicação.
+                </p>
+
+            </div>
+
+
+            <div class="approach-item">
+
+                <div class="approach-number">
+                    04
+                </div>
+
+                <h3>Automatizar</h3>
+
+                <p>
+                    Sempre que possível, transformar
+                    tarefas repetitivas em processos
+                    confiáveis e automatizados.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CONTATO -->
+
+<section id="contato" class="contact">
+
+    <div class="container">
+
+        <div class="contact-content">
+
+            <div class="section-label">
+                Contato
+            </div>
+
+            <h2>
+                Vamos construir algo melhor.
+            </h2>
+
+            <p>
+                Se você tem um sistema para modernizar,
+                uma API para construir, um banco para otimizar
+                ou uma ideia envolvendo IA, podemos conversar.
+            </p>
+
+            <div class="buttons"
+                 style="justify-content:center;">
+
+                <a href="mailto:seuemail@exemplo.com"
+                   class="button button-primary">
+                    Enviar e-mail
+                </a>
+
+                <a href="#"
+                   class="button button-secondary">
+                    LinkedIn
+                </a>
+
+                <a href="#"
+                   class="button button-secondary">
+                    GitHub
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+```
+
+</main>
+
+<footer>
+
+```
+<div class="container footer-content">
+
+    <span>
+        © 2026 Marcos Paulo
+    </span>
+
+    <span>
+        Backend • Dados • Automação • IA
+    </span>
+
+</div>
+```
+
+</footer>
+
+<script>
+
+    const menuButton =
+        document.getElementById("menuButton");
+
+    const menu =
+        document.getElementById("menu");
+
+
+    menuButton.addEventListener("click", () => {
+
+        menu.classList.toggle("active");
+
+    });
+
+
+    document.querySelectorAll("#menu a")
+        .forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                menu.classList.remove("active");
+
+            });
+
+        });
+
+</script>
+
+</body>
+</html>
